@@ -7,7 +7,7 @@ import UsersList from './components/Users/UsersList';
 function App() {
   const addUserHandler = (uName, uAge) => {
       setUsersList((prev) => {
-        return [...prev, {name: uName, age: uAge}];
+        return [...prev, {name: uName, age: uAge, id: Math.random().toString()}];
       });
   }
 
