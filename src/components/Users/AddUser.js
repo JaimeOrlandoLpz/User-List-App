@@ -7,17 +7,20 @@ import styles from './AddUser.module.css'
 const AddUser = (props) => {
     const [enteredUserName, setEnteredUserName] = useState('');
     const [enteredAge, setEnteredAge] = useState('');
+    const [error, setError] = useState();
 
     const addUserEventHandler = (event) =>{
         event.preventDefault(); 
         if(enteredUserName.trim().length === 0 || enteredAge.trim().length === 0){
-            // Finish execution of the function if any of the User Inputs was left empty
+            // Update Error and Finish Function Execution
+            setError({title: "Empty Value(s)", message: "Please fill in every value"});
             return;
         }
         
         // +enteredAge transforms enteredAge from string to number
         if(+enteredAge < 1){
-            // Finish the execution of the function if the age isn't a valid number
+            // Update error and finish execution if age isn't a valid number
+            setError({title: "Invalid Age", message: "Please enter a valid age"});
             return;
         }
         
@@ -25,6 +28,10 @@ const AddUser = (props) => {
         setEnteredUserName('');
         setEnteredAge('');
 
+    }
+
+    const errorHandler = () => {
+        setError(null);
     }
 
     const usernameChangeHandler = (event) => {
@@ -37,7 +44,8 @@ const AddUser = (props) => {
 
     return(
     <div>
-        <ErrorModal title = {"An Error Occurred"} message = {"Something Went Wrong"}></ErrorModal>
+        {/* Conditionally render error modal*/}
+        { error && <ErrorModal title = {error.title} message = {error.message} onConfirm = {errorHandler}></ErrorModal> }
         <Card className = {styles.input}>
             <form onSubmit={addUserEventHandler}>
                 <label htmlFor="username">Username</label>
