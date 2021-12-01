@@ -38,7 +38,7 @@ const ErrorModal = props => {
     return(
         <>
             {/* Use React DOM to  create Portal and link our component with the real DOM place where we want to teleport it*/}
-            {ReactDOM.createPortal(<Backdrop onClick = {props.onConfirm}/>, document.getElementById("backdrop-root"))}
+            {ReactDOM.createPortal(<Backdrop onConfirm = {props.onConfirm}/>, document.getElementById("backdrop-root"))}
             {ReactDOM.createPortal(<ModalOverlay title = {props.title} message = {props.message} onConfirm = {props.onConfirm}/>, document.getElementById("modal-root"))}
         </>
     );
