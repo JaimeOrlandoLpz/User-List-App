@@ -13,10 +13,10 @@ function App() {
 
   const [usersList, setUsersList] = useState([]);
   return (
-    <div>
+    <>
       <AddUser onAddUser = {addUserHandler}/>
       <UsersList users = {usersList}/>
-    </div>
+    </>
   );
 }
 
